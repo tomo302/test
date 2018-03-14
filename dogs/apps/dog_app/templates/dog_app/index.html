@@ -7,6 +7,36 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello!!</h1>
+    <form action="/create" method="POST">
+        {% csrf_token %}
+    <label for="name">Name: <input type="text" name="name" id="name"></label>
+    <label for="breed">Breed: <input type="text" name="breed" id="breed"></label>
+    <input type="submit" value="Creat">
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Dog Name</th>
+                <th>Breed</th>
+                <th>Created at</th>
+                <th>Update at</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for dog in dogs %}
+                <td>{{ dog.name }}</td>
+                <td>{{ dog.breed }}</td>
+                <td>{{ dog.create_at }} </td>
+                <td>{{ dog.update_at }}</td>
+                <td><a href="/edit/{{ dog.id }}">Edit  </a><a href="/delete/{{ dog.id }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+
+
+    </table>
 </body>
 </html>
